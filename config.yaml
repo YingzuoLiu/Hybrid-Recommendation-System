@@ -1,0 +1,39 @@
+data:
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  num_workers: 8
+  batch_size: 512
+  dataset_path: "C:/Users/liuzu/OneDrive/Desktop/recsys2/data/ml-32m"
+
+
+training:
+  seed: 42
+  epochs: 5
+  learning_rate: 0.005
+  early_stopping_patience: 5
+  device: "cuda"
+
+models:
+  bprmf:
+    embedding_dim: 32
+    reg_weight: 0.01
+  
+  itemknn:
+    k: 20
+    similarity_metric: "cosine"
+  
+  deepfm:
+    embedding_dim: 64
+    mlp_dims: [256, 128, 64]
+    dropout: 0.1
+    
+  lightgcn:
+    embedding_dim: 64
+    n_layers: 3
+    reg_weight: 0.01
+
+evaluation:
+  k_values: [5, 10, 20]
+  metrics: ["recall", "ndcg"]
+  num_folds: 10
